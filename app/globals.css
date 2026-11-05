@@ -9,7 +9,7 @@
 }
 
 @layer components {
-  .wrap { @apply mx-auto w-full max-w-page px-5 sm:px-8 xl:px-0; }
+  .wrap { @apply mx-auto w-full max-w-page px-5 sm:px-8 min-[1360px]:px-0; }
   .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
   .btn-dark { @apply btn bg-ink text-white hover:bg-black; }
   .btn-light { @apply btn border border-line bg-white text-ink hover:bg-soft; }
