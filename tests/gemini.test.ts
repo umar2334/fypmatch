@@ -57,10 +57,16 @@ describe("generateIdeas", () => {
     fetchMock.mockResolvedValueOnce(new Response("{}")).mockResolvedValueOnce(reply(good));
     await expect(generateIdeas("p")).resolves.toHaveLength(5);
   });
-  it("reports quota errors as busy, without retrying", async () => {
-    fetchMock.mockResolvedValue(new Response("{}", { status: 429 }));
+  it("falls back to the next model when one is overloaded", async () => {
+    fetchMock.mockResolvedValueOnce(new Response("{}", { status: 503 })).mockResolvedValueOnce(reply(good));
+    await generateIdeas("p");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(String(fetchMock.mock.calls[0]![0])).not.toBe(String(fetchMock.mock.calls[1]![0]));
+  });
+  it("reports busy once every model has failed", async () => {
+    fetchMock.mockImplementation(async () => new Response("{}", { status: 429 }));
     await expect(generateIdeas("p")).rejects.toMatchObject({ code: "busy" });
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(3);
   });
   it("reports network failures as busy", async () => {
     fetchMock.mockRejectedValue(new Error("down"));
