@@ -6,7 +6,7 @@ export const SKILL_LEVELS = ["Beginner", "Intermediate", "Advanced"] as const;
 export const TEAM_SIZES = [1, 2, 3, 4] as const;
 export const DURATIONS = [4, 6, 8, 12] as const;
 export const CAREER_GOALS = ["Job in Pakistan", "Job abroad", "Startup", "Apply for Masters", "Freelance"] as const;
-export const UNIVERSITIES = ["Indus", "NUST", "FAST", "LUMS", "COMSATS", "IBA", "UET", "GIKI", "Other"] as const;
+export const UNIVERSITIES = ["NUST", "FAST", "LUMS", "COMSATS", "IBA", "UET", "GIKI", "Other"] as const;
 export const SEMESTERS = ["6th", "7th", "8th", "Other"] as const;
 export const SUPERVISOR_STYLES = ["Research-focused", "Industry-focused", "Not sure yet"] as const;
 
